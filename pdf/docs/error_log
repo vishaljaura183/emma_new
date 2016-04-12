@@ -1,0 +1,9 @@
+[16-Jul-2015 21:07:32 Europe/Zurich] PHP Fatal error:  Call to a member function format() on a non-object in /home/tbldev1/public_html/logbook/functions.php on line 73
+[20-Jul-2015 09:32:34 Europe/Zurich] PHP Fatal error:  Call to a member function format() on a non-object in /home/tbldev1/public_html/logbook/functions.php on line 73
+[20-Jul-2015 09:32:47 Europe/Zurich] PHP Fatal error:  Call to a member function format() on a non-object in /home/tbldev1/public_html/logbook/functions.php on line 73
+[20-Jul-2015 09:32:56 Europe/Zurich] PHP Fatal error:  Call to a member function format() on a non-object in /home/tbldev1/public_html/logbook/functions.php on line 73
+[20-Jul-2015 09:33:19 Europe/Zurich] PHP Fatal error:  Call to a member function format() on a non-object in /home/tbldev1/public_html/logbook/functions.php on line 73
+[06-Aug-2015 19:40:15 Europe/Zurich] PHP Warning:  Division by zero in /home/tbldev1/public_html/logbook/functions.php on line 48
+[06-Aug-2015 19:40:17 Europe/Zurich] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/tbldev1/public_html/logbook/functions.php:48) in /home/tbldev1/public_html/logbook/pdf/tcpdf.php on line 9043
+[06-Aug-2015 19:41:46 Europe/Zurich] PHP Warning:  Division by zero in /home/tbldev1/public_html/logbook/functions.php on line 48
+[06-Aug-2015 19:41:48 Europe/Zurich] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/tbldev1/public_html/logbook/functions.php:48) in /home/tbldev1/public_html/logbook/pdf/tcpdf.php on line 9043
