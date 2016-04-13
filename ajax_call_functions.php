@@ -13,7 +13,18 @@ if( $_GET )
 	{
 		Ajax_call_functions::getPollVenuesNTechs();
 	}
+	if( $_GET['action'] == "check_tech_username_uniqueness" )
+	{
+		Ajax_call_functions::checkTechnicianExistanceByUsername( $_GET['username'] );
+	}
+	if( $_GET['action'] == "check_tech_email_uniquenes" )
+	{
+		Ajax_call_functions::checkTechnicianExistanceByEmailId( $_GET['email'] );
+	}
 }
+
+
+
 class Ajax_call_functions
 {
 	public static function del_poll_venues( $ids_arr ){
@@ -22,6 +33,44 @@ class Ajax_call_functions
 		$sql = "DELETE from poll_venues WHERE id IN (".$ids.")";
 		$results = $db->query($sql);	
 		echo json_encode(1);
+	}
+	
+	/**
+	 * Checks the existance of technician on the basis of
+	 * username passed as a parameter.
+	 * @param string $username
+	 * @author Jaskaran
+	 * @version 1.0
+	 */
+	public static function checkTechnicianExistanceByUsername($username)
+	{
+		include_once("inc/config.php");
+		$sql 		= "SELECT * from technician WHERE username ='".$username."' AND is_deleted = 0";
+		$result 	= mysqli_query($db, $sql);
+    	
+    	if($result->num_rows)
+    		echo json_encode(FALSE);
+    	else
+    		echo json_encode(TRUE);
+	}
+	
+	/**
+	 * Checks the existance of technician on the basis of
+	 * email id passed as a parameter.
+	 * @param string $username
+	 * @author Jaskaran
+	 * @version 1.0
+	 */
+	public static function checkTechnicianExistanceByEmailId($email)
+	{
+		include_once("inc/config.php");
+		$sql 		= "SELECT * from technician WHERE email = '".$email."' AND is_deleted = 0";
+		$result 	= mysqli_query($db, $sql);
+    	
+    	if($result->num_rows)
+    		echo json_encode(FALSE);
+    	else
+    		echo json_encode(TRUE);
 	}
 	
 	public static function getPollVenuesNTechs(){

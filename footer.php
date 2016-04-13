@@ -13,7 +13,7 @@
 	<!-- start: JavaScript-->
 
 		<script src="js/jquery-1.9.1.min.js"></script>
-	<script src="js/jquery-migrate-1.0.0.min.js"></script>
+		<script src="js/jquery-migrate-1.0.0.min.js"></script>
 	
 		<script src="js/jquery-ui-1.10.0.custom.min.js"></script>
 	
@@ -22,6 +22,8 @@
 		<script src="js/modernizr.js"></script>
 	
 		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.validate.min.js"></script>
+		<script src="js/phoneUS.js"></script>
 	
 		<script src="js/jquery.cookie.js"></script>
 	

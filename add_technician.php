@@ -4,6 +4,79 @@ include('header.php');
 include('process/add_technician.php');
 
 ?>
+<style>
+label.error {
+    color: red;
+    float: none !important;
+    line-height: 16px;
+    margin-bottom: 0;
+    margin-top: 2px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	//Validations----------------
+	validator = $( "form#to_be_validated" ).validate({
+		rules: {
+			first_name:{
+				required : true,
+				maxlength: 100
+			},
+			last_name:{
+				required : true,
+				maxlength: 100
+			},
+			email:{
+				required : true,
+				email:true,
+				remote: "ajax_call_functions.php?action=check_tech_email_uniquenes"
+			},
+			phonee:{
+				required : true,
+				phoneUS: true
+			},
+			username:{
+				required : true,
+				remote: "ajax_call_functions.php?action=check_tech_username_uniqueness"
+			},
+			new_pass:{
+				required: true,
+				minlength: 8,
+				maxlength: 20,
+				elec_app_password: true
+			},
+			conf_pass:{
+				required: true,
+				minlength: 8,
+				maxlength: 20,
+				equalTo: "#password"
+			}
+		},
+		messages: {
+			username:{
+				remote: "This username is already taken."
+			},
+			email:{
+				remote: "This email ID is already taken."
+			}
+		}
+	});
+
+	/*
+     * This addMethod can be used for password.
+     * Password must contain at least one numeric and one alphabetic character.
+     * 
+     * @author jsingh7
+     */
+    $.validator.addMethod("elec_app_password", function (value, element) {
+        return this.optional(element) || (value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/));
+    },
+        'Password must contain minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character.');
+	
+});
+
+</script>
+
 			<!-- start: Content -->
 			<div id="content" class="span10">
 			
@@ -41,7 +114,7 @@ include('process/add_technician.php');
 						</div>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal" method="POST" action="">
+						<form class="form-horizontal" id ="to_be_validated" method="POST" action="">
 						  <fieldset>
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">First Name </label>
@@ -61,7 +134,7 @@ include('process/add_technician.php');
 							<div class="control-group">
 							  <label class="control-label" for="date01">Email</label>
 							  <div class="controls">
-								<input type="email" required class="span6 typeahead" id="email" name="email" value="<?php echo $row['email']; ?>">
+								<input type="email" class="span6 typeahead" id="email" name="email" value="<?php echo $row['email']; ?>">
 								<input type="hidden" class="span6 typeahead" id="userid" name="userid" value="<?php echo $row['id']; ?>">
 							  </div>
 							</div>
@@ -78,21 +151,21 @@ include('process/add_technician.php');
 							<div class="control-group">
 							  <label class="control-label" for="date01">Phone</label>
 							  <div class="controls">
-								<input type="text" required class="span6 typeahead" id="date01" name="phone"  value="<?php echo $row['phone']; ?>">
+								<input type="text" class="span6 typeahead" name="phonee"  value="<?php echo $row['phone']; ?>">
 							  </div>
 							</div>		
 							
 							<div class="control-group">
 							  <label class="control-label" for="date01">Username</label>
 							  <div class="controls">
-								<input type="text" required class="span6 typeahead" id="username" name="username"  value="<?php echo $row['username']; ?>">
+								<input type="text" class="span6 typeahead" id="username" name="username"  value="<?php echo $row['username']; ?>">
 							  </div>
 							</div>		
 							
 							<div class="control-group">
 							  <label class="control-label" for="date01">Password</label>
 							  <div class="controls">
-								<input type="password" class="span6 typeahead" required id="date01" name="new_pass" value="">
+								<input type="password" class="span6 typeahead" id="password" name="new_pass" value="">
 								<input type="hidden" id="date01" name="change_pass" value="change_pass">
 							  </div>
 							</div>
@@ -100,7 +173,7 @@ include('process/add_technician.php');
 							<div class="control-group">
 							  <label class="control-label" for="date01">Confirm Password</label>
 							  <div class="controls">
-								<input type="password" class="span6 typeahead" id="date01" required name="conf_pass" value="">
+								<input type="password" class="span6 typeahead" name="conf_pass" value="">
 							  </div>
 							</div>
 							

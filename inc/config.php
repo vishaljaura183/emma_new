@@ -19,9 +19,9 @@ define("TICKET_PHOTO_SIGN_PATH","/uploads/poll_site_data/sign_images/");
 
  if($_SERVER['HTTP_HOST'] == 'localhost'){
 	define("LIVE_SITE",'http://'.$_SERVER['HTTP_HOST']."/$rootPath");
-	define("PROJECT_FOLDER","emma");
-	define("PROJECT_LIB","emma");
-	define("DEBUG_MODE","0"); //2 - Enable, 0 - Disable
+	define("PROJECT_FOLDER","emma_new");
+	define("PROJECT_LIB","emma_new");
+	define("DEBUG_MODE","1"); //2 - Enable, 0 - Disable
 }
 else{
 	define("LIVE_SITE",'http://'.$_SERVER['HTTP_HOST']);
