@@ -190,7 +190,7 @@ header("location:login.php?msg=plslogin");
 							</ul>
 						</li>
 						<li><a href="#" class="dropmenu" ><i class="icon-user"></i><span class="hidden-tablet">Manage Personnels</span>
-						<span class="label label-important"> 2 </span></a>
+						<span class="label label-important"> 4 </span></a>
 							<ul>
 								
 								<li><a class="submenu" href="technicians.php"><i class="icon-reorder"></i><span class="hidden-tablet"> View All Personnels</span></a></li>

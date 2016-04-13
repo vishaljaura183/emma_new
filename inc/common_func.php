@@ -196,6 +196,7 @@ while($results_users=mysqli_fetch_array($result,MYSQLI_ASSOC)){
 	$lname = $object['last_name'];
 	$return_array[$i]['id'] = $object['id'];
 	$return_array[$i]['username']= $fname." ".$lname;
+	$return_array[$i]['role']= $object['role'];
 	//$return_array[$i]['username']= $object['username']." - [".$fname." ".$lname."]";
 	$return_array[$i]['latitude']= $object['latitude'];
 	$return_array[$i]['longitude']= $object['longitude'];
@@ -359,7 +360,7 @@ while($results_users=mysqli_fetch_array($result,MYSQLI_ASSOC)){
 function getServiceTicketData($id){
 global $db;
 
-$sql = "SELECT ST.*, AD.name as dispatcher, PV.ward, PV.address_line_1, PV.address_line_2,TD.created_at as closed_time, TD.comments as tech_comments, PV.voting_district, PV.ST, PV.ZIP , PV.post_office , PV.name_of_location, PV.latitude, PV.longitude, TH.first_name, TH.last_name, TH.username,TH.email
+$sql = "SELECT ST.*, AD.name as dispatcher, PV.ward, PV.address_line_1, PV.address_line_2,TD.created_at as closed_time, TD.comments as tech_comments, PV.voting_district, PV.ST, PV.ZIP , PV.post_office , PV.name_of_location, PV.latitude, PV.longitude, TH.first_name, TH.last_name, TH.username,TH.email, TH.role
 			FROM service_tickets  ST
 
 			LEFT JOIN poll_venues PV
@@ -423,6 +424,7 @@ $sql = "SELECT ST.*, AD.name as dispatcher, PV.ward, PV.address_line_1, PV.addre
 		$return_array[$i]['first_name']= $object['first_name'];
 		$return_array[$i]['last_name']= $object['last_name'];
 		$return_array[$i]['email']= $object['email'];
+		$return_array[$i]['role']= $object['role'];
 		//$return_array[$i]['address']= $object['address'];
 		$return_array[$i]['reason_call']= $object['reason_call'];
 		$return_array[$i]['supply_needed']= $object['supply_needed'];

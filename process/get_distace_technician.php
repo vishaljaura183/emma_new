@@ -18,7 +18,8 @@ foreach($get_all_technicians as $tech_data)
 {
 	
  $num_open_tkt = $tech_data['num_open_tkt'];
- $username = $tech_data['username'].";".$tech_data['id'].";".$num_open_tkt;
+ $role=$tech_data['role']=='rover'?' (R) ':'';
+ $username = $tech_data['username'].$role.";".$tech_data['id'].";".$num_open_tkt;
  $latitude_tech = $tech_data['latitude'];
  $longitude_tech = $tech_data['longitude'];
  //echo "distance from ".$latitude_poll_site. "-".$longitude_poll_site . " to ". $latitude_tech."--".$longitude_tech. " = 2.36 Miles.";

@@ -8,7 +8,7 @@ $last_name=$_POST['last_name'];
 $username=$_POST['username']; 
 $email=$_POST['email']; 
 $role=$_POST['role']; 
-$phone=$_POST['phone']; 
+$phone=$_POST['phonee']; 
 $password=$_POST['new_pass']; 
 
 

@@ -96,7 +96,7 @@ var markers = [];
 	  	
 	  	//ROVER  Orange // ROVER IMAGE
 		var image5 = {
-		    url: 'img/tech_icon_green.png',
+		    url: 'img/new_green_rover.png',
 		  //  url: 'img/tech_icon_green24.png',
 		    // This marker is 20 pixels wide by 32 pixels high.
 		    size: new google.maps.Size(32, 40),
@@ -105,8 +105,9 @@ var markers = [];
 		    // The anchor for this image is the base of the flagpole at (0, 32).
 		   // anchor: new google.maps.Point(32, 37)
 	  	};
+		// ROVER // RED 
 		var image6 = {
-		    url: 'img/tech_icon_new.png',
+		    url: 'img/red_new_rover.png',
 		  //  url: 'img/tech_icon_green24.png',
 		    // This marker is 20 pixels wide by 32 pixels high.
 		    size: new google.maps.Size(32, 40),

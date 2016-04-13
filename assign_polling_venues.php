@@ -222,7 +222,7 @@ if (isset ( $_POST["submit"] ))
 									  <select id="technician_id" name="technician_id" onchange="preview_ticket();" required>
 									  <option value='' >Select</option>
 										<?php foreach($techicians_data as $tech){ ?>
-										<option value="<?php echo $tech['id']; ?>" rel="<?php echo $tech['first_name']; ?>"><?php echo $tech['first_name']; ?></option>
+										<option value="<?php echo $tech['id']; ?>" rel="<?php echo $tech['first_name']; ?>"><?php echo $tech['first_name']; ?><?php echo $tech['role']=='rover'?' (R) ':''; ?></option>
 										
 										<?php } ?>
 										
