@@ -5,8 +5,8 @@
  * allows '-' or ' ' as a separator and allows parens around area code
  * some people may want to put a '1' in front of their number
  *
- * 1(212)-999-2345 or
- * 212 999 2344 or
+ * 1(212)-999-2345 FREE or
+ * 212 999 2344 FREE or
  * 212-999-0983
  *
  * but not

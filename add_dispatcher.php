@@ -4,11 +4,77 @@ include_once('header.php');
 include('process/add_officer.php');
 
 ?>
+<style>
+label.error {
+    color: red;
+    float: none !important;
+    line-height: 16px;
+    margin-bottom: 0;
+    margin-top: 2px;
+}
+</style>
 <style type="text/css">
 			body { background: url(img/bg-login.jpg) !important; }
 			#content{padding: 28px 28px 0px 28px!important;}
 			.error_login{background:yellow; color:red; border: 1px;text-align: center;}
-		</style>
+</style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	//Validations----------------
+	validator = $( "form#to_be_validated" ).validate({
+		rules: {
+			name:{
+				required : true,
+				maxlength: 100
+			},
+			email:{
+				required : true,
+				email:true,
+				remote: "ajax_call_functions.php?action=check_disp_email_uniquenes"
+			},
+			username:{
+				required : true,
+				remote: "ajax_call_functions.php?action=check_disp_username_uniqueness"
+			},
+			new_pass:{
+				required: true,
+				minlength: 8,
+				maxlength: 20,
+				elec_app_password: true
+			},
+			conf_pass:{
+				required: true,
+				minlength: 8,
+				maxlength: 20,
+				equalTo: "#password"
+			}
+		},
+		messages: {
+			username:{
+				remote: "This username is already taken."
+			},
+			email:{
+				remote: "This email ID is already taken."
+			}
+		}
+	});
+
+	/*
+     * This addMethod can be used for password.
+     * Password must contain at least one numeric and one alphabetic character.
+     * 
+     * @author jsingh7
+     */
+    $.validator.addMethod("elec_app_password", function (value, element) {
+        return this.optional(element) || (value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/));
+    },
+        'Password must contain minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character.');
+	
+});
+
+</script>
+
 			<!-- start: Content -->
 			<div id="content" class="span10">
 			
@@ -46,7 +112,7 @@ include('process/add_officer.php');
 						</div>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal" method="POST" action="">
+						<form class="form-horizontal" id ="to_be_validated" method="POST" action="">
 						  <fieldset>
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">Name </label>
@@ -58,7 +124,7 @@ include('process/add_officer.php');
 							<div class="control-group">
 							  <label class="control-label" for="date01">Username</label>
 							  <div class="controls">
-								<input type="text" required class="span6 typeahead" id="date01" name="username" value="">
+								<input type="text"  class="span6 typeahead" id="" name="username" value="">
 								<input type="hidden" class="span6 typeahead" id="userid" name="userid" value="">
 							  </div>
 							</div>
@@ -66,21 +132,21 @@ include('process/add_officer.php');
 							<div class="control-group">
 							  <label class="control-label" for="date01">Email</label>
 							  <div class="controls">
-								<input type="email" required class="span6 typeahead" id="date01" name="email"  value="">
+								<input type="email"  class="span6 typeahead" id="" name="email"  value="">
 							  </div>
 							</div>
 							
 							<div class="control-group">
 							  <label class="control-label" for="date01">Password</label>
 							  <div class="controls">
-								<input type="password" required class="span6 typeahead" id="date01" name="new_pass" value="">
+								<input type="password"  class="span6 typeahead" id="" name="new_pass" value="">
 							  </div>
 							</div>
 							
 							<div class="control-group">
 							  <label class="control-label" for="date01">Confirm Password</label>
 							  <div class="controls">
-								<input type="password" required class="span6 typeahead" id="date01" name="conf_pass" value="">
+								<input type="password"  class="span6 typeahead" id="" name="conf_pass" value="">
 							  </div>
 							</div>
 
