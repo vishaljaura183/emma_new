@@ -585,7 +585,7 @@ class Election_web_services
 		$inspector_dropoff_loc = @$this->params->inspector_dropoff_loc;
 		$service_ticket_id = $this->params->service_ticket_id;
 		$num_votes_cast = @$this->params->num_votes_cast;
-		$comments = @$this->params->c;
+		$comments = @$this->params->comments;
 		$base64_string_img = $this->params->poll_image_data;
 		$base64_string_signature = $this->params->poll_image_signature;
 		$filename = md5(time().uniqid()).".jpeg"; 

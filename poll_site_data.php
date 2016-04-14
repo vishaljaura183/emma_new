@@ -47,6 +47,7 @@ include('header.php');
 								  <th>Insp. drop-off Loc</th>
 								  <th>Cellphone</th>
 								  <th>Homephone</th>
+								  <th>Notes</th>
 								  
 								  
 								  <th>Submitted On</th>
@@ -71,6 +72,7 @@ include('header.php');
 	$homephone = $object['homephone'];
 	
 	$submitted_on = $object['created_at'];
+	$notes = $object['notes'];
 	
   ?>
 							<tr id="tr_<?php echo $id; ?>">
@@ -83,6 +85,7 @@ include('header.php');
 								<td><?php echo $inspector_dropoff_loc; ?></td>
 								<td><?php echo $cellphone; ?></td>
 								<td><?php echo $homephone; ?></td>
+								<td><?php echo $notes; ?></td>
 						
 								<td><?php echo $submitted_on; ?></td>
 								
