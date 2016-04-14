@@ -21,11 +21,11 @@ if( $_GET )
 	{
 		Ajax_call_functions::checkTechnicianExistanceByEmailId( $_GET['email'] );
 	}
-	if( $_GET['action'] == "check_dispatcher_username_uniqueness" )
+	if( $_GET['action'] == "check_disp_username_uniqueness" )
 	{
 		Ajax_call_functions::checkDispatcherExistanceByUsername( $_GET['username'] );
 	}
-	if( $_GET['action'] == "check_dispatcher_email_uniquenes" )
+	if( $_GET['action'] == "check_disp_email_uniquenes" )
 	{
 		Ajax_call_functions::checkDispatcherExistanceByEmailId( $_GET['email'] );
 	}
@@ -72,7 +72,7 @@ class Ajax_call_functions
 	public static function checkDispatcherExistanceByUsername($username)
 	{
 		include_once("inc/config.php");
-		$sql 		= "SELECT * from admin WHERE username ='".$username."' AND is_deleted = 0";
+		$sql 		= "SELECT * from admin WHERE username ='".$username."'";
 		$result 	= mysqli_query($db, $sql);
     	
     	if($result->num_rows)
@@ -84,7 +84,7 @@ class Ajax_call_functions
 	/**
 	 * Checks the existance of technician on the basis of
 	 * email id passed as a parameter.
-	 * @param string $username
+	 * @param string $email
 	 * @author Jaskaran
 	 * @version 1.0
 	 */
@@ -92,6 +92,25 @@ class Ajax_call_functions
 	{
 		include_once("inc/config.php");
 		$sql 		= "SELECT * from technician WHERE email = '".$email."' AND is_deleted = 0";
+		$result 	= mysqli_query($db, $sql);
+    	
+    	if($result->num_rows)
+    		echo json_encode(FALSE);
+    	else
+    		echo json_encode(TRUE);
+	}
+
+	/**
+	 * Checks the existance of dispatcher on the basis of
+	 * email id passed as a parameter.
+	 * @param string $email
+	 * @author Jaskaran
+	 * @version 1.0
+	 */
+	public static function checkDispatcherExistanceByEmailId($email)
+	{
+		include_once("inc/config.php");
+		$sql 		= "SELECT * from admin WHERE email ='".$email."'";
 		$result 	= mysqli_query($db, $sql);
     	
     	if($result->num_rows)
