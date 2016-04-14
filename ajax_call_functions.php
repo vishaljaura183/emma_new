@@ -21,6 +21,14 @@ if( $_GET )
 	{
 		Ajax_call_functions::checkTechnicianExistanceByEmailId( $_GET['email'] );
 	}
+	if( $_GET['action'] == "check_dispatcher_username_uniqueness" )
+	{
+		Ajax_call_functions::checkDispatcherExistanceByUsername( $_GET['username'] );
+	}
+	if( $_GET['action'] == "check_dispatcher_email_uniquenes" )
+	{
+		Ajax_call_functions::checkDispatcherExistanceByEmailId( $_GET['email'] );
+	}
 }
 
 
@@ -46,6 +54,25 @@ class Ajax_call_functions
 	{
 		include_once("inc/config.php");
 		$sql 		= "SELECT * from technician WHERE username ='".$username."' AND is_deleted = 0";
+		$result 	= mysqli_query($db, $sql);
+    	
+    	if($result->num_rows)
+    		echo json_encode(FALSE);
+    	else
+    		echo json_encode(TRUE);
+	}
+
+	/**
+	 * Checks the existance of dispatcher on the basis of
+	 * username passed as a parameter.
+	 * @param string $username
+	 * @author Jaskaran
+	 * @version 1.0
+	 */
+	public static function checkDispatcherExistanceByUsername($username)
+	{
+		include_once("inc/config.php");
+		$sql 		= "SELECT * from admin WHERE username ='".$username."' AND is_deleted = 0";
 		$result 	= mysqli_query($db, $sql);
     	
     	if($result->num_rows)
