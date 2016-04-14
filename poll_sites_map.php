@@ -96,7 +96,7 @@ var markers = [];
 	  	
 	  	//ROVER  Orange // ROVER IMAGE
 		var image5 = {
-		    url: 'img/tech_icon_yellow.png',
+		    url: 'img/new_green_rover.png',
 		  //  url: 'img/tech_icon_green24.png',
 		    // This marker is 20 pixels wide by 32 pixels high.
 		    size: new google.maps.Size(32, 40),
@@ -105,7 +105,18 @@ var markers = [];
 		    // The anchor for this image is the base of the flagpole at (0, 32).
 		   // anchor: new google.maps.Point(32, 37)
 	  	};
-
+		// ROVER // RED 
+		var image6 = {
+		    url: 'img/red_new_rover.png',
+		  //  url: 'img/tech_icon_green24.png',
+		    // This marker is 20 pixels wide by 32 pixels high.
+		    size: new google.maps.Size(32, 40),
+		    // The origin for this image is (0, 0).
+		    origin: new google.maps.Point(0, 0)
+		    // The anchor for this image is the base of the flagpole at (0, 32).
+		   // anchor: new google.maps.Point(32, 37)
+	  	};
+		// TECH GREEN
 		var image4 = {
 		    url: 'img/new_green2.png',
 		  //  url: 'img/tech_icon_green24.png',
@@ -116,6 +127,7 @@ var markers = [];
 		    // The anchor for this image is the base of the flagpole at (0, 32).
 		   // anchor: new google.maps.Point(32, 37)
 	  	};
+		
 		
 	  	//TECH RED // Red would indicate that the technician is on assignment 
 		var image2 = {
@@ -162,7 +174,7 @@ var markers = [];
 					 var marker = new google.maps.Marker({
  	    			    position: {lat: parseFloat(poll_venues_n_techs_json.techs[i].lat), lng: parseFloat(poll_venues_n_techs_json.techs[i].long)},
  	    			    map: map,
- 	    			    title: poll_venues_n_techs_json.techs[i].rover_detail,
+ 	    			    title: poll_venues_n_techs_json.techs[i].tech_detail,
  	    		    	icon: image5,
  	    				//animation: google.maps.Animation.BOUNCE,
  	    		        shape: shape			  				    
@@ -181,6 +193,17 @@ var markers = [];
             			break;
             			
         			case 1:
+					if(poll_venues_n_techs_json.techs[i].role == 'rover'){
+					 var marker = new google.maps.Marker({
+ 	    			    position: {lat: parseFloat(poll_venues_n_techs_json.techs[i].lat), lng: parseFloat(poll_venues_n_techs_json.techs[i].long)},
+ 	    			    map: map,
+ 	    			    title: poll_venues_n_techs_json.techs[i].tech_detail,
+ 	    		    	icon: image6,
+ 	    				//animation: google.maps.Animation.BOUNCE,
+ 	    		        shape: shape			  				    
+ 	    			  });
+					}
+					else{
        				 var marker = new google.maps.Marker({
  	    			    position: {lat: parseFloat(poll_venues_n_techs_json.techs[i].lat), lng: parseFloat(poll_venues_n_techs_json.techs[i].long)},
  	    			    map: map,
@@ -189,6 +212,7 @@ var markers = [];
  	    				//animation: google.maps.Animation.BOUNCE,
  	    		        shape: shape			  				    
  	    			  });
+					}
             			break;
             			
         			case 2:

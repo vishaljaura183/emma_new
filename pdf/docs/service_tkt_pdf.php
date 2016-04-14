@@ -75,7 +75,7 @@ if($data['dispatcher_solve']=='1'){
 				</tr>';
 }
 else{
-	
+	$role = $data['role']=='rover'?'Rover':'Technician';
 $solve_by ='<tr>
 					<td>First Name:</td>
 					<td>'.$data["first_name"].'<input type="hidden" id="technician_id" name="technician_id" value="'.$data["technician_id"].'" /></td>
@@ -84,7 +84,10 @@ $solve_by ='<tr>
 					<td>Last Name:</td>
 					<td>'.$data["last_name"].'</td>
 				</tr>
-				
+				<tr>
+					<td>Personnel Role:</td>
+					<td>'.$role.'</td>
+				</tr>
 				<tr>
 					<td>Username</td>
 					<td>'.$data["username"].'</td>

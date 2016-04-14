@@ -17,7 +17,7 @@ $whr_condition = "WHERE ST.status=".$st_type;
 else{
 $whr_condition = "";
 }
-	$sql = "SELECT DISTINCT ST.id, ST.*, AD.name as dispatcher,AD.name as dispatcher, PV.ward, PV.address_line_1,PV.voting_district, PV.ST, PV.ZIP ,TH.first_name, TH.last_name, TH.email
+	$sql = "SELECT DISTINCT ST.id, ST.*, AD.name as dispatcher,AD.name as dispatcher, PV.ward, PV.address_line_1,PV.voting_district, PV.ST, PV.ZIP ,TH.first_name, TH.last_name, TH.email, TH.role
 	FROM service_tickets  ST
 
 	LEFT JOIN poll_venues PV
@@ -109,7 +109,8 @@ date_default_timezone_set("America/New_York");
 		$solve_by = "Dispatcher Solve";
 	}
 	else{
-		$solve_by = $object['first_name'].' '.$object['last_name'];
+		$role=$object['role']=='rover'?' (R) ':'';
+		$solve_by = $object['first_name'].' '.$object['last_name'].$role;
 	}
 	
   ?>
