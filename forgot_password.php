@@ -4,7 +4,7 @@
 	
 	<!-- start: Meta -->
 	<meta charset="utf-8">
-	<title>Elections USA-Admin</title>
+	<title>Elections USA-Admin - Forgot Password</title>
 	<meta name="description" content="Elections USA-Admin">
 	<meta name="author" content="Dennis Ji">
 	<meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
@@ -56,38 +56,29 @@
 						
 					</div>
 					<?php
-					if(isset($_GET['msg']) && $_GET['msg']=='error'){
-					echo "<div class='error_login'>Invalid Username/Password</div>";
+					if(isset($_GET['msg']) && $_GET['msg']=='error_sending_email'){
+						echo "<div class='error_sending_email error_login'>Oops! We faced a problem in sending you an email.</div>";
 					}
-					elseif(isset($_GET['msg']) && $_GET['msg']=='plslogin'){
-					echo "<div class='error_login'>Please login to visit secure pages</div>";
+					elseif(isset($_GET['msg']) && $_GET['msg']=='email_sent'){
+						echo "<div class='email_sent error_login'>An email has been sent in to your inbox, Please check and follow the instructions.</div>";
 					}
-					elseif(isset($_GET['msg']) && $_GET['msg']=='logout'){
-					echo "<div class='error_login'>Logged Out Successfully!!</div>";
+					elseif(isset($_GET['msg']) && $_GET['msg']=='admin_does_not_exist'){
+						echo "<div class='admin_does_not_exist error_login'>The email ID you have entered does not not exist in our database.</div>";
 					}
 					?>
-					<h2>Login to your account</h2>
-					<form class="form-horizontal" action="checklogin.php" method="post">
+					<h2>Forgot Password?</h2>
+					<form class="form-horizontal" action="send_new_password_email.php" method="post">
 						<fieldset>
-							
-							<div class="input-prepend" title="Username">
+							<div class="input-prepend" title="Email ID">
 								<span class="add-on"><i class="halflings-icon user"></i></span>
-								<input class="input-large span10" name="username" id="username" type="text" placeholder="type username"/>
+								<input class="input-large span10" name="emai_id" id="emai_id" type="text" placeholder="Type in Registered Email ID"/>
 							</div>
 							<div class="clearfix"></div>
-
-							<div class="input-prepend" title="Password">
-								<span class="add-on"><i class="halflings-icon lock"></i></span>
-								<input class="input-large span10" name="password" id="password" type="password" placeholder="type password"/>
-							</div>
-							<div class="clearfix"></div>
-							
 							<h2 style = "float:left; display: inline-block; margin-top: 28px; text-decoration:underline; font-size:14px;">
-								<a href ="forgot_password.php">Forgot Password</a>
-							</h2>	
-
+								<a href ="login.php"> Login Page</a>
+							</h2>
 							<div class="button-login">
-								<button type="submit" class="btn btn-primary">Login</button>
+								<button type="submit" class="btn btn-primary">Submit</button>
 							</div>
 							<div class="clearfix"></div>
 					</form>
@@ -119,10 +110,10 @@
 		<script src='js/jquery.dataTables.min.js'></script>
 
 		<script src="js/excanvas.js"></script>
-	<script src="js/jquery.flot.js"></script>
-	<script src="js/jquery.flot.pie.js"></script>
-	<script src="js/jquery.flot.stack.js"></script>
-	<script src="js/jquery.flot.resize.min.js"></script>
+		<script src="js/jquery.flot.js"></script>
+		<script src="js/jquery.flot.pie.js"></script>
+		<script src="js/jquery.flot.stack.js"></script>
+		<script src="js/jquery.flot.resize.min.js"></script>
 	
 		<script src="js/jquery.chosen.min.js"></script>
 	
