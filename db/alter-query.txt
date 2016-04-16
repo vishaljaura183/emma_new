@@ -1,0 +1,1 @@
+ALTER TABLE  `admin` ADD  `is_deleted` TINYINT NOT NULL DEFAULT  '0' COMMENT  '1=deleted, 0=not deleted' AFTER  `usertype`
