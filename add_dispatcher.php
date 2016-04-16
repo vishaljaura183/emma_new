@@ -22,7 +22,7 @@ label.error {
 <script type="text/javascript">
 $(document).ready(function(){
 	//Validations----------------
-	validator = $( "form#to_be_validated" ).validate({
+	validator = $("#to_be_validated2").validate({
 		rules: {
 			name:{
 				required : true,
@@ -47,7 +47,7 @@ $(document).ready(function(){
 				required: true,
 				minlength: 8,
 				maxlength: 20,
-				equalTo: "#password"
+				equalTo: "#password2"
 			}
 		},
 		messages: {
@@ -57,9 +57,12 @@ $(document).ready(function(){
 			email:{
 				remote: "This email ID is already taken."
 			}
+		},
+		submitHandler: function(form) {
+			$("#to_be_validated2").submit();
 		}
 	});
-
+	
 	/*
      * This addMethod can be used for password.
      * Password must contain at least one numeric and one alphabetic character.
@@ -72,6 +75,12 @@ $(document).ready(function(){
         'Password must contain minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character.');
 	
 });
+function validate_form(){
+//alert('ddd');
+if($("#to_be_validated2").valid()){
+$("#to_be_validated2").submit();
+}
+}
 
 </script>
 
@@ -112,19 +121,19 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal" id ="to_be_validated" method="POST" action="">
+						<form class="form-horizontal" action="" id="to_be_validated" method="POST" >
 						  <fieldset>
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">Name </label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead" id="typeahead"  name="name" value="" data-provide="typeahead" data-items="4" >
+								<input type="text" class="span6 typeahead" id="typeahead"  required name="name" value="" data-provide="typeahead" data-items="4" >
 								
 							  </div>
 							</div>
 							<div class="control-group">
 							  <label class="control-label" for="date01">Username</label>
 							  <div class="controls">
-								<input type="text"  class="span6 typeahead" id="" name="username" value="">
+								<input type="text"  class="span6 typeahead" id="" name="username" value="" required>
 								<input type="hidden" class="span6 typeahead" id="userid" name="userid" value="">
 							  </div>
 							</div>
@@ -132,14 +141,14 @@ $(document).ready(function(){
 							<div class="control-group">
 							  <label class="control-label" for="date01">Email</label>
 							  <div class="controls">
-								<input type="email"  class="span6 typeahead" id="" name="email"  value="">
+								<input type="email"  class="span6 typeahead" id="" name="email"  required value="">
 							  </div>
 							</div>
 							
 							<div class="control-group">
 							  <label class="control-label" for="date01">Password</label>
 							  <div class="controls">
-								<input type="password"  class="span6 typeahead" id="" name="new_pass" value="">
+								<input type="password"  class="span6 typeahead" id="password2" name="new_pass" value="" required minlength="8">
 							  </div>
 							</div>
 							
@@ -158,9 +167,9 @@ $(document).ready(function(){
 							  <button type="reset" class="btn">Cancel</button>
 							</div>
 						  </fieldset>
-						</form>   
 
 					</div>
+						</form>   
 				</div><!--/span-->
 
 			</div><!--/row-->

@@ -767,17 +767,20 @@ class Election_web_services
 	// --------- Updates the Location of the Technician in database -------------------
 	private function update_tech_location(){
 	        global $db;
-            if($this->params->lat && $this->params->long && $this->params->username){
+            if($this->params->lat && $this->params->long && $this->params->user_id){
                 $lat = $this->params->lat ;
                 $long = $this->params->long ;
-                $username = $this->params->username;
+				$user_id = $this->params->user_id;
+                /*
+				$username = $this->params->username;
                 $regid = $this->params->regid;
                 $sql = "Select id from technician where username = '$username' ";
                 $result=mysqli_query($db,$sql);
                 $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
                 $count=mysqli_num_rows($result);
-                if($count>0){
-                    $technicianID = $row['id'] ;
+				*/
+                if($user_id){
+                    $technicianID = $user_id;
                     $update_sql = "UPDATE technician SET latitude = '$lat', longitude = '$long' where id = '$technicianID' ";
                     $update_result = mysqli_query($db, $update_sql);
                     $ret_array['status'] = 1;
