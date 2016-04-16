@@ -65,6 +65,9 @@
 					elseif(isset($_GET['msg']) && $_GET['msg']=='logout'){
 					echo "<div class='error_login'>Logged Out Successfully!!</div>";
 					}
+					elseif(isset($_GET['msg']) && $_GET['msg']=='pass_reset_success'){
+					echo "<div class='error_login'>Password Reset Successfully!s Please login with new password which you received in email.</div>";
+					}
 					?>
 					<h2>Login to your account</h2>
 					<form class="form-horizontal" action="checklogin.php" method="post">
@@ -72,7 +75,7 @@
 							
 							<div class="input-prepend" title="Username">
 								<span class="add-on"><i class="halflings-icon user"></i></span>
-								<input class="input-large span10" name="username" id="username" type="text" placeholder="type username"/>
+								<input class="input-large span10" name="username" id="username" type="text" placeholder="Username OR Email"/>
 							</div>
 							<div class="clearfix"></div>
 

@@ -23,24 +23,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	    }
 	    $new_pass = $randomString;
 		
+		$id_user = base64_encode($row['id']);
+		$pass_user = base64_encode($new_pass);
 	    //Set new_password field in database. It is the feild holds
 	    //password to be set on user approval.
-	    $np_sql = "UPDATE admin SET new_password='".$new_pass."' WHERE email='".$email_id."'";
-	    $db->query($np_sql);
+	   // $np_sql = "UPDATE admin SET new_password='".$new_pass."' WHERE email='".$email_id."'";
+	   // $db->query($np_sql);
 	    
 		//Email template.
 		$to = $email_id;
-		$subject = "Elections USA - Admin Password Recovery Email";
+		
+		$subject = "EMMA - Admin Password Recovery Email";
 		
 		$message = "
 		<html>
 		<head>
-		<title>Elections USA - Admin Password Recovery Email</title>
+		<title>EMMA - Password Recovery Email</title>
 		</head>
 		<body>
 		<p>Hi Admin,</p>
 		<p>Your new password is: <b>".$new_pass."</b></p>
 		<p>Please click on following link to activate your new password.</p>
+		<p><a href='".LIVE_SITE.'/reset_user_pass.php?id='.$id_user.'&pass='.$pass_user.'&pass_reset=1'."'>CLICK HERE TO RESET PASSWORD</a></p>
 		</body>
 		</html>
 		";
@@ -50,7 +54,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 		
 		// More headers
-		$headers .= 'From: <karansamra.it@gmail.com>' . "\r\n";
+		$headers .= 'From: <mailer@mobileapptech.us>' . "\r\n";
 		
 	    //Send email.
 		if(mail($to,$subject,$message,$headers))

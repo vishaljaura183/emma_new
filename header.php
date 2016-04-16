@@ -201,14 +201,17 @@ header("location:login.php?msg=plslogin");
 							</ul>
 						</li>
 						<?php if($user_role == '1'){ ?>
-						<li><a href="#" class="dropmenu"  ><i class="icon-user"></i><span class="hidden-tablet">Manage Dispatchers</span>
+						<li><a href="#" class="dropmenu"  ><i class="icon-user"></i><span class="hidden-tablet">Manage Web Users</span>
 						<span class="label label-important"> 2 </span></a>
-							<ul>
+						<ul>
 								
-								<li><a class="submenu" href="officers.php"><i class="icon-reorder"></i><span class="hidden-tablet"> View All Dispatchers</span></a></li>
-								<li><a class="submenu" href="add_dispatcher.php"><i class="icon-plus"></i><span class="hidden-tablet"> Add New Dispatcher</span></a></li>
+							<li><a class="submenu" href="officers.php"><i class="icon-reorder"></i><span class="hidden-tablet"> View All Users</span></a></li>
+							<li><a class="submenu" href="add_user.php"><i class="icon-plus"></i><span class="hidden-tablet"> Add New User</span></a></li>
+							<li><a class="submenu" href="officers.php?usertype=1"><i class="icon-reorder"></i><span class="hidden-tablet"> Admins</span></a></li>
+							<li><a class="submenu" href="officers.php?usertype=2"><i class="icon-reorder"></i><span class="hidden-tablet"> Dispatchers</span></a></li>
+							<li><a class="submenu" href="officers.php?usertype=3"><i class="icon-reorder"></i><span class="hidden-tablet"> View Only Users</span></a></li>
 								
-							</ul>
+						</ul>
 						
 						</li>
 						<?php } ?>

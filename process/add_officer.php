@@ -7,8 +7,9 @@ if(isset($_POST['submit']))
 $name=$_POST['name']; 
 $username=$_POST['username']; 
 $email=$_POST['email']; 
+$usertype=$_POST['usertype']; 
 $new_pass=$_POST['new_pass']; 
-$usertype=2; 
+
 
 
 

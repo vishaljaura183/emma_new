@@ -1,6 +1,20 @@
 <?php
 include('header.php');
-$sql="SELECT * FROM admin WHERE usertype='2'";
+$extra_condition = '';
+if($_GET['usertype'] == '1'){
+$extra_condition = "AND usertype=1";
+}
+elseif($_GET['usertype'] == '2'){
+$extra_condition = "AND usertype=2";
+}
+elseif($_GET['usertype'] == '3'){
+$extra_condition = "AND usertype=3";
+}
+else{
+$extra_condition = "";
+}
+
+$sql="SELECT * FROM admin WHERE is_deleted != 1 ".$extra_condition;
 $result=mysqli_query($db,$sql);
 
 
@@ -15,13 +29,13 @@ $result=mysqli_query($db,$sql);
 					<a href="index.php">Home</a> 
 					<i class="icon-angle-right"></i>
 				</li>
-				<li><a href="#">Dispatchers</a></li>
+				<li><a href="#">Users</a></li>
 			</ul>
-			<a href="add_dispatcher.php">Add Dispatcher</a>
+			<a href="add_user.php">Add New User</a>
 			<div class="row-fluid sortable">		
 				<div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon user"></i><span class="break"></span>Dispatchers</h2>
+						<h2><i class="halflings-icon user"></i><span class="break"></span>All Web Users</h2>
 						<div class="box-icon">
 							
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -35,6 +49,8 @@ $result=mysqli_query($db,$sql);
 								  <th>Name</th>
 								  <th>Username</th>
 								  <th>Email</th>
+								  <th>User Type</th>
+								  <th>Created at</th>
 								 
 								  <th>Actions</th>
 							  </tr>
@@ -44,11 +60,24 @@ $result=mysqli_query($db,$sql);
   while($results_users=mysqli_fetch_array($result,MYSQLI_ASSOC)){ 
    $object = $results_users;
 	$id = $object['id'];
+	$user_type = $object['usertype'];
+	if($user_type == '1'){
+	$user_type="Admin";
+	}
+	elseif($user_type == '2'){
+	$user_type="Dispatcher";
+	}
+	elseif($user_type == '3'){
+	$user_type="View Only";
+	}
+	
   ?>
 							<tr id="tr_<?php echo $id; ?>">
 								<td><?php echo $object['name'];?></td>
 								 <td><?php echo $object['username']; ?></td>
 								<td><?php echo $object['email']; ?></td>
+								<td><?php echo $user_type; ?></td>
+								<td><?php echo $object['created_at']; ?></td>
 								
 								<td class="center">
 									<a class="btn btn-success" title="Edit Profile" href="profile_officer.php?id=<?php echo $id;?>">
