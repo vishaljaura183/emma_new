@@ -69,7 +69,13 @@
 
 		<script src="js/custom.js"></script>
 		  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMSyfPFG4MtrtBHoN2UJsX9pAo3D2Z8pM&signed_in=true&callback=initMap"></script>
+		  <script>
+		  function toggle_icon(e){
+		  alert('ee');
+		 $(e).toggleClass('icon-reorder', 'icon-chevron-down'); 
+		  }
+		  </script>
 	<!-- end: JavaScript-->
-
+<?php ob_end_flush(); ?>
 </body>
 </html>

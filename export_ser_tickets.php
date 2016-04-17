@@ -109,8 +109,18 @@ header('Content-Disposition: attachment; filename='.$filename);
 fputcsv($output, array('Ticket Number', 'Technician','Voting District','Call Reason','Ticket Status','Enroute Time','Onscene Time','Received' ,'Closed Time','Action Taken', 'Image Taken', 'Signature Image' ));
 
 		
+
+if(mysqli_num_rows($result)>0){
+
 foreach($data as $data_rows) {
 	fputcsv($output, $data_rows);
+}
+}
+
+else{
+//mysqli_num_rows($result); die('--');
+echo $data_rows = 'No Data Found.';
+
 }
 //echo $output
 //echo 'test';

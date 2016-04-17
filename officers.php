@@ -14,7 +14,7 @@ else{
 $extra_condition = "";
 }
 
-$sql="SELECT * FROM admin WHERE is_deleted != 1 ".$extra_condition;
+$sql="SELECT * FROM admin WHERE is_deleted != 1 AND usertype != -1 ".$extra_condition;
 $result=mysqli_query($db,$sql);
 
 

@@ -26,6 +26,7 @@ include('header.php');
 				</li>
 				<li><a href="#">Poll Data Collected</a></li>
 			</ul>
+			<a class="download_btn" href="<?php echo LIVE_SITE;?>/exp_poll_data.php">Export Data to CSV</a>
 			<div class="row-fluid sortable">		
 				<div class="box span12">
 					<div class="box-header" data-original-title>

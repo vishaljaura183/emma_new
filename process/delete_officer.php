@@ -7,7 +7,7 @@ $id=$_POST['del_id'];
 
 
 
-$sql=	"UPDATE admin SET is_delete=1 WHERE id=$id";
+$sql="UPDATE admin SET is_delete=1 WHERE id=$id";
 $result=mysqli_query($db,$sql);
 if($result){
 echo "success";

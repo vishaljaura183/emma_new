@@ -1,6 +1,10 @@
 <?php
+ob_start();
 include ('header.php');
-
+if($_SESSION['usertype'] >2 ) {
+ //die('ddd');
+header("location:reports.php");
+}
 include ('inc/common_func.php');
 $techicians_data = get_values_technicians($db); 
 $get_poll_venues = get_values_poll_venues($db); 

@@ -1,5 +1,11 @@
 <?php
+ob_start();
 include ('header.php');
+ if($_SESSION['usertype'] >1 ) {
+ //die('ddd');
+header("location:reports.php");
+}
+						
 //	echo "<style> #sidebar-left {display: none;} </style>";
 //print_r($_SESSION); die;
 //Reading file==============================================

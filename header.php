@@ -169,40 +169,51 @@ header("location:login.php?msg=plslogin");
 				<div class="nav-collapse sidebar-nav">
 					<ul class="nav nav-tabs nav-stacked main-menu">
 					<!--	<li><a href="users.php"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li> -->	
-					
+					<?php if($_SESSION['usertype']<2) {
+					?>
 						<li><a href="poll_venues.php"><i class="icon-align-justify"></i><span class="hidden-tablet">Election Setup</span></a></li>
+					<?php } ?>
 						
 				
 					<!--	<li><a href="users.php"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li> -->	
 					
 						<li><a href="poll_venues_listing.php"><i class="icon-reorder"></i><span class="hidden-tablet">Poll Venues Listing</span></a></li>
+						
 						<!--<li><a href="assign_polling_venues.php"><i class="icon-tasks"></i><span class="hidden-tablet">Service Ticket</span></a></li> -->
 						<li>
 							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Service Ticket</span>
 							
-							<span class="label label-important"> 5 </span></a>
+							<i class="icon-list-ul"></i></a>
 							<ul>
+							<?php if($_SESSION['usertype'] <3 ) {
+					?>
 								<li><a class="submenu" href="assign_polling_venues.php"><i class="icon-plus"></i><span class="hidden-tablet"> Assign New Ticket</span></a></li>
+								<?php } ?>
 								<li><a class="submenu" href="view_service_tickets.php"><i class="icon-reorder"></i><span class="hidden-tablet"> View All Tickets</span></a></li>
 								<li><a class="submenu" href="view_service_tickets.php?sr_type=0"><i class="icon-file-alt"></i><span class="hidden-tablet"> Open Tickets</span></a></li>
 								<li><a class="submenu" href="view_service_tickets.php?sr_type=1"><i class="icon-file-alt"></i><span class="hidden-tablet"> Closed Tickets</span></a></li>
 								<li><a class="submenu" href="view_service_tickets.php?sr_type=2"><i class="icon-file-alt"></i><span class="hidden-tablet"> Cancelled Tickets</span></a></li>
 							</ul>
 						</li>
-						<li><a href="#" class="dropmenu" ><i class="icon-user"></i><span class="hidden-tablet">Manage Personnels</span>
-						<span class="label label-important"> 4 </span></a>
+						
+						<?php if($_SESSION['usertype'] < 2 ) {
+					?>
+						<li><a href="#" class="dropmenu" ><i class="icon-user"></i><span class="hidden-tablet">Manage Personnel</span>
+						<i class="icon-list-ul"></i></a>
 							<ul>
 								
-								<li><a class="submenu" href="technicians.php"><i class="icon-reorder"></i><span class="hidden-tablet"> View All Personnels</span></a></li>
-								<li><a class="submenu" href="add_technician.php"><i class="icon-plus"></i><span class="hidden-tablet"> Add New Personnels</span></a></li>
+								<li><a class="submenu" href="technicians.php"><i class="icon-reorder"></i><span class="hidden-tablet"> View All Personnel</span></a></li>
+								<li><a class="submenu" href="add_technician.php"><i class="icon-plus"></i><span class="hidden-tablet"> Add New Personnel</span></a></li>
 								<li><a class="submenu" href="technicians.php?role=tech"><i class="icon-reorder"></i><span class="hidden-tablet"> Technicians</span></a></li>
 								<li><a class="submenu" href="technicians.php?role=rover"><i class="icon-reorder"></i><span class="hidden-tablet"> Rovers</span></a></li>
 								
 							</ul>
 						</li>
-						<?php if($user_role == '1'){ ?>
+						<?php } ?>
+						<?php if($_SESSION['usertype'] <2 ) {
+						?>
 						<li><a href="#" class="dropmenu"  ><i class="icon-user"></i><span class="hidden-tablet">Manage Web Users</span>
-						<span class="label label-important"> 2 </span></a>
+						<i class="icon-list-ul"></i></a>
 						<ul>
 								
 							<li><a class="submenu" href="officers.php"><i class="icon-reorder"></i><span class="hidden-tablet"> View All Users</span></a></li>
