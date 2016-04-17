@@ -29,6 +29,10 @@ if( $_GET )
 	{
 		Ajax_call_functions::checkDispatcherExistanceByEmailId( $_GET['email'] );
 	}
+	if($_GET['action'] == "get_service_ticket")
+	{
+		Ajax_call_functions::get_all_service_tickets( $_GET['sr_type'] );
+	}
 }
 
 
@@ -162,5 +166,101 @@ class Ajax_call_functions
 		$final_arr['techs'] 		= $lat_longs_arr2;
 		echo json_encode($final_arr);
 		
+	}
+	
+	public static function get_all_service_tickets($st_type)
+	{
+		include ('inc/common_func.php');
+		
+		$techicians_data = get_values_technicians($db); 
+		
+		if($st_type){
+			$whr_condition = "WHERE ST.status=".$st_type;
+		} else {
+			$whr_condition = "";
+		}
+		
+		$sql = "SELECT DISTINCT ST.id, ST.*, 
+		AD.name as dispatcher,
+		AD.name as dispatcher, 
+		PV.ward, 
+		PV.address_line_1,
+		PV.voting_district, 
+		PV.ST, 
+		PV.ZIP, 
+		TH.first_name, 
+		TH.last_name, 
+		TH.email, 
+		TH.role
+		FROM service_tickets  ST
+	
+		LEFT JOIN poll_venues PV
+		ON ST.polling_site_id=PV.id
+	
+		LEFT JOIN admin AD
+		ON ST.dispatcher_id=AD.id
+	
+		LEFT JOIN technician TH
+		ON ST.technician_id=TH.id
+	
+		".$whr_condition."
+		ORDER BY ST.id ASC";
+	
+		$result = mysqli_query($db, $sql);
+		$ret_array = array();
+		$i = 0;	
+		while ($results_users=mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+			
+	   		$object = $results_users;
+			$id = $object['id'];
+			$sr_ticket_no = sprintf('%06d', $object['id']);
+			$address_poll_site = $object['address_line_1'].', '.$object['ST'].', '.$object['ZIP'];
+			if ($object['status'] == '0') {
+				$status = '<span style="color: green;">Open</span>';
+			} elseif ($object['status'] == '2') {
+				$status = '<span style="color: grey;">Cancelled</span>';
+			} else {
+				$status = '<span style="color: red;">Closed</span>';
+			}
+			
+			if ($object['response_acceptance'] == '1') {
+				$accept_reject = '<span style=\"color: green;\">Yes</span>';
+			} elseif ($object['response_acceptance'] == '0') {
+				$accept_reject = '<span style=\"color: red;\">Rejected</span>';
+			} else {
+				$accept_reject = "No";
+			}
+			
+			if ($object['dispatcher_solve']=='1'){
+				$solve_by = "Dispatcher Solve";
+		
+			} else {
+				$role=$object['role']=='rover'?' (R) ':'';
+				$solve_by = $object['first_name'].' '.$object['last_name'].$role;
+			}
+			
+			/*id*/$ret_array[$i][0] 				= '<a href="javascript:void(0);" onclick="view_detail_ticket("'.$id.'");">'.$sr_ticket_no.'</a>';
+			/*solve_by*/$ret_array[$i][1] 			= $solve_by;
+			/*dispatcher*/$ret_array[$i][2] 		= $object['dispatcher'];
+			/*reason_call*/$ret_array[$i][3] 		= $object['reason_call'];
+			/*voting_district*/$ret_array[$i][4] 	= $object['voting_district'];
+			/*enroute_datetime*/$ret_array[$i][5] 	= $object['enroute_datetime']?date('Y-m-d H:i:s',$object['enroute_datetime']): 'NA';
+			/*on_scene_datetime*/$ret_array[$i][6] 	= $object['on_scene_datetime']?date('Y-m-d H:i:s',$object['on_scene_datetime']): 'NA';
+			/*priority_ticket*/$ret_array[$i][7] 	= $object['priority_ticket'];
+			/*status*/$ret_array[$i][8] 			= $status;
+			/*accept_reject*/$ret_array[$i][9] 		= $accept_reject;
+			/*'created_at'*/$ret_array[$i][10] 		= $object['created_at'];
+			/*actions*/$ret_array[$i][11] 			= '<a target=" " title="View PDF" href="'.LIVE_SITE.'"/pdf/docs/service_tkt_pdf.php?id="'.$id.'">
+														<img src="'.LIVE_SITE.'/img/pdf.png"  />
+													</a>
+													<a  title="View Ticket Detail" href="javascript:void(0);" 
+													onclick="view_detail_ticket("'.$id.'");">
+														<img src="'.LIVE_SITE.'/img/look.jpg" width="40" height="30"  />
+													</a>';
+			
+			$data['data'] = $ret_array;
+			$i++;
+		}
+		echo json_encode($data);
 	}
 }

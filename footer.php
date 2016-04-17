@@ -29,7 +29,7 @@
 	
 		<script src='js/fullcalendar.min.js'></script>
 	
-		<script src='js/jquery.dataTables.min.js'></script>
+		<script src='https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js'></script>
 
 		<script src="js/excanvas.js"></script>
 	<script src="js/jquery.flot.js"></script>
