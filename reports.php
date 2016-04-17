@@ -31,8 +31,8 @@ label, select, button, input[type="button"], input[type="reset"], input[type="su
 		<label class="title_report">Service Tickets</label>
 
 		<label>Select Date</label>
-		FROM <input type="input" name="from_date" id="" class="datepicker2" required />
-		TO <input type="input" name="to_date" id="" class="datepicker2" required />
+		FROM <input type="input" name="from_date" id="" class="datepicker2"  />
+		TO <input type="input" name="to_date" id="" class="datepicker2" />
 		<input type="submit" class="btn btn-primary" id="download_btn" value="Download"/>
 		</form>
 	</div>
@@ -51,8 +51,8 @@ label, select, button, input[type="button"], input[type="reset"], input[type="su
 		<label class="title_report">Poll Sites Data</label>
 
 		<label>Select Date</label>
-		FROM <input type="input" name="from_date" id="" class="datepicker2" required />
-		TO <input type="input" name="to_date" id="" class="datepicker2" required />
+		FROM <input type="input" name="from_date" id="" class="datepicker2"  />
+		TO <input type="input" name="to_date" id="" class="datepicker2"  />
 		<input type="submit" class="btn btn-primary" id="download_btn" value="Download"/>
 		</form>
 	</div>
@@ -62,7 +62,26 @@ label, select, button, input[type="button"], input[type="reset"], input[type="su
 </td>
 
 </tr>
+<tr><td>
+	<table>
+	<tr>
+	<td>
+	<div class="report_div">
+		<form action="export_ticket_data.php" method="POST">
+		<label class="title_report">Ticket Collected Data</label>
 
+		<label>Select Date</label>
+		FROM <input type="input" name="from_date" id="" class="datepicker2"  />
+		TO <input type="input" name="to_date" id="" class="datepicker2" />
+		<input type="submit" class="btn btn-primary" id="download_btn" value="Download"/>
+		</form>
+	</div>
+	</td>
+	</tr>
+	</table>
+</td>
+
+</tr>
 
 </table>
 </div>

@@ -21,13 +21,13 @@ $result=mysqli_query($db,$sql);
 					<a href="index.php">Home</a> 
 					<i class="icon-angle-right"></i>
 				</li>
-				<li><a href="#">Personnels <?php echo $role_title; ?> </a></li>
+				<li><a href="#">Personnel <?php echo $role_title; ?> </a></li>
 			</ul>
-			<a href="add_technician.php">Add Personnels</a>
+			<a href="add_technician.php">Add Personnel</a>
 			<div class="row-fluid sortable">		
 				<div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon user"></i><span class="break"></span>Personnels <?php echo $role_title; ?></h2>
+						<h2><i class="halflings-icon user"></i><span class="break"></span>Personnel <?php echo $role_title; ?></h2>
 						<div class="box-icon">
 							
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>

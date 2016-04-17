@@ -86,7 +86,7 @@
 							<div class="clearfix"></div>
 							
 							<h2 style = "float:left; display: inline-block; margin-top: 28px; text-decoration:underline; font-size:14px;">
-								<a href ="forgot_password.php">Forgot Password</a>
+								<a href ="forgot_password.php">Forgot Password ?</a>
 							</h2>	
 
 							<div class="button-login">

@@ -47,7 +47,9 @@ date_default_timezone_set("America/New_York");
 				</li>
 				<li><a href="#">Service Tickets</a></li>
 			</ul>
+			<?php if($_SESSION['usertype'] < 3 ) { ?>
 			<a href="assign_polling_venues.php">Add Service Ticket</a>
+			<?php } ?>
 			<a class="download_btn" href="<?php echo LIVE_SITE;?>/export_ser_tickets.php">Export Data to CSV</a>
 			
 			<div class="row-fluid sortable">		
@@ -178,9 +180,11 @@ date_default_timezone_set("America/New_York");
 		</div>
 		<div class="modal-footer">
 			<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+			<?php if($_SESSION['usertype'] < 3 ) { ?>
 			<a href="javascript:void(0);" id="add_notes_link" onclick="add_notes();" class="btn btn-primary">Add Notes</a> 
 			<a href="javascript:void(0);" id="ticket_cancel_link" onclick="cancel_service_ticket();" class="btn btn-primary">Cancel This Ticket</a> 
 			<a href="javascript:void(0);" id="redirect_ticket_link" onclick="redirect_service_ticket();" class="btn btn-primary">Redirect</a> 
+			<?php } ?>
 		</div>
 	</div>
 	<!-- =========================== CANCEL TICKETS WINDOW ========================================== -->

@@ -2,7 +2,10 @@
 ob_start();
 include_once('header.php');
 include('process/add_officer.php');
-
+ if($_SESSION['usertype'] >1 ) {
+ //die('ddd');
+header("location:reports.php");
+}
 ?>
 <style>
 label.error {

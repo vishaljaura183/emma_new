@@ -98,7 +98,7 @@ while($row = mysqli_fetch_assoc($result)) {
 }
 
 	//print_r($data); die;
-$filename = "service_tickets.csv";
+$filename = "tickets_data.csv";
 $output = fopen('php://output', 'w');
 
 	
@@ -107,8 +107,17 @@ header('Content-Disposition: attachment; filename='.$filename);
 fputcsv($output, array('Ticket Number', 'Technician','Dispatcher','Ticket Status','Action Taken', 'Image Taken', 'Signature Image' ));
 
 		
+if(mysqli_num_rows($result)>0){
+
 foreach($data as $data_rows) {
 	fputcsv($output, $data_rows);
+}
+}
+
+else{
+//mysqli_num_rows($result); die('--');
+echo $data_rows = 'No Data Found.';
+
 }
 //echo $output
 //echo 'test';
