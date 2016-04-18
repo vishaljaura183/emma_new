@@ -57,9 +57,6 @@ $(document).ready(function(){
 			email:{
 				remote: "This email ID is already taken."
 			}
-		},
-		submitHandler: function(form) {
-			$("#to_be_validated2").submit();
 		}
 	});
 	
@@ -75,12 +72,6 @@ $(document).ready(function(){
         'Password must contain minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character.');
 	
 });
-function validate_form(){
-//alert('ddd');
-if($("#to_be_validated2").valid()){
-$("#to_be_validated2").submit();
-}
-}
 
 </script>
 
