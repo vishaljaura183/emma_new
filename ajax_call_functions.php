@@ -6,6 +6,14 @@ if($_POST)
 	{
 		Ajax_call_functions::del_poll_venues( array($_POST['id']) );
 	}
+	if($_POST['action'] == "delete_common_supply")
+	{
+		Ajax_call_functions::delete_common_supply( array($_POST['id']) );
+	}
+	if($_POST['action'] == "delete_call_reason")
+	{
+		Ajax_call_functions::delete_call_reason( array($_POST['id']) );
+	}
 }
 if( $_GET )
 {
@@ -33,6 +41,7 @@ if( $_GET )
 	{
 		Ajax_call_functions::get_all_service_tickets( $_GET['sr_type'] );
 	}
+	
 }
 
 
@@ -43,6 +52,20 @@ class Ajax_call_functions
 		include_once("inc/config.php");
 		$ids = implode(',', $ids_arr);
 		$sql = "DELETE from poll_venues WHERE id IN (".$ids.")";
+		$results = $db->query($sql);	
+		echo json_encode(1);
+	}
+	public static function delete_common_supply( $ids_arr ){
+		include_once("inc/config.php");
+		$ids = implode(',', $ids_arr);
+		$sql = "DELETE from common_election_supplies WHERE id IN (".$ids.")";
+		$results = $db->query($sql);	
+		echo json_encode(1);
+	}
+	public static function delete_call_reason( $ids_arr ){
+		include_once("inc/config.php");
+		$ids = implode(',', $ids_arr);
+		$sql = "DELETE from call_reasons WHERE id IN (".$ids.")";
 		$results = $db->query($sql);	
 		echo json_encode(1);
 	}
@@ -174,7 +197,7 @@ class Ajax_call_functions
 		
 		$techicians_data = get_values_technicians($db); 
 		
-		if($st_type){
+		if(isset($st_type) && $st_type !=''){
 			$whr_condition = "WHERE ST.status=".$st_type;
 		} else {
 			$whr_condition = "";
@@ -239,7 +262,7 @@ class Ajax_call_functions
 				$solve_by = $object['first_name'].' '.$object['last_name'].$role;
 			}
 			
-			/*id*/$ret_array[$i][0] 				= '<a href="javascript:void(0);" onclick="view_detail_ticket("'.$id.'");">'.$sr_ticket_no.'</a>';
+			/*id*/$ret_array[$i][0] 				= '<a href="javascript:void(0);" onclick="view_detail_ticket('.$id.');">'.$sr_ticket_no.'</a>';
 			/*solve_by*/$ret_array[$i][1] 			= $solve_by;
 			/*dispatcher*/$ret_array[$i][2] 		= $object['dispatcher'];
 			/*reason_call*/$ret_array[$i][3] 		= $object['reason_call'];
@@ -250,11 +273,11 @@ class Ajax_call_functions
 			/*status*/$ret_array[$i][8] 			= $status;
 			/*accept_reject*/$ret_array[$i][9] 		= $accept_reject;
 			/*'created_at'*/$ret_array[$i][10] 		= $object['created_at'];
-			/*actions*/$ret_array[$i][11] 			= '<a target=" " title="View PDF" href="'.LIVE_SITE.'"/pdf/docs/service_tkt_pdf.php?id="'.$id.'">
+			/*actions*/$ret_array[$i][11] 			= '<a target="_blank" title="View PDF" href="pdf/docs/service_tkt_pdf.php?id='.$id.'">
 														<img src="'.LIVE_SITE.'/img/pdf.png"  />
 													</a>
 													<a  title="View Ticket Detail" href="javascript:void(0);" 
-													onclick="view_detail_ticket("'.$id.'");">
+													onclick="view_detail_ticket('.$id.');">
 														<img src="'.LIVE_SITE.'/img/look.jpg" width="40" height="30"  />
 													</a>';
 			

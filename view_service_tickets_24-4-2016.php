@@ -42,7 +42,9 @@ date_default_timezone_set("America/New_York");
 				</li>
 				<li><a href="#">Service Tickets</a></li>
 			</ul>
+			<?php if($_SESSION['usertype'] < 3 ) { ?>
 			<a href="assign_polling_venues.php">Add Service Ticket</a>
+			<?php } ?>
 			<a class="download_btn" href="<?php echo LIVE_SITE;?>/export_ser_tickets.php">Export Data to CSV</a>
 			
 			<div class="row-fluid sortable">		
@@ -56,15 +58,7 @@ date_default_timezone_set("America/New_York");
 						</div>
 					</div>
 					<div class="box-content">
-						<table
-							class="display 
-									table 
-									table-striped 
-									table-bordered 
-									bootstrap-datatable 
-									datatable_tickets"
-							cellspacing="0" 
-							width="100%">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable_tickets">
 						  <thead>
 							  <tr>
 								  <th width="8%">Ticket Number</th>
@@ -80,8 +74,84 @@ date_default_timezone_set("America/New_York");
 								  <th width="10%">Date Created</th>
 								  <th width="20%">Actions</th>
 							  </tr>
-						  </thead>
-
+						  </thead>   
+						  <tbody>
+						  <?php
+  while($results_users=mysqli_fetch_array($result,MYSQLI_ASSOC)){ 
+   $object = $results_users;
+	$id = $object['id'];
+	$sr_ticket_no = sprintf('%06d', $object['id']);
+	$address_poll_site = $object['address_line_1'].', '.$object['ST'].', '.$object['ZIP'];
+	if($object['status'] == '0'){
+		$status = "<span style='color: green;'>Open</span>";
+		}
+		elseif($object['status'] == '2'){
+		$status = "<span style='color: grey;'>Cancelled</span>";
+		
+		}
+		else{
+		$status = "<span style='color: red;'>Closed</span>";
+		
+		}
+	if($object['response_acceptance'] == '1'){
+	$accept_reject = "<span style='color: green;'>Yes</span>";
+	}
+	elseif($object['response_acceptance'] == '0'){
+	$accept_reject = "<span style='color: red;'>Rejected</span>";
+	}
+	else{
+	$accept_reject = "No";
+	}
+	if($object['dispatcher_solve']=='1'){
+		$solve_by = "Dispatcher Solve";
+	}
+	else{
+		$role=$object['role']=='rover'?' (R) ':'';
+		$solve_by = $object['first_name'].' '.$object['last_name'].$role;
+	}
+	
+  ?>
+							<tr id="tr_<?php echo $id; ?>">
+								<td><a href="javascript:void(0);" onclick="view_detail_ticket('<?php echo $id; ?>');"><?php echo $sr_ticket_no; ?></a></td>
+								 <td><?php echo $solve_by; ?></td>
+								 <td><?php echo $object['dispatcher']; ?></td>
+								<td><?php echo $object['reason_call']; ?></td>
+								<td><?php echo  $object['voting_district']; ?></td>
+								<td><?php echo  $object['enroute_datetime']?date('Y-m-d H:i:s',$object['enroute_datetime']): 'NA'; ?></td>
+								<td class="center">
+									<?php echo  $object['on_scene_datetime']?date('Y-m-d H:i:s',$object['on_scene_datetime']): 'NA'; ?>
+								</td>
+								<td class="center">
+									<?php echo  $object['priority_ticket']; ?>
+								</td>
+								<td class="center">
+									<?php echo $status;
+									//echo date_default_timezone_get();
+									?>
+								</td>
+								<td class="center">
+									<?php echo $accept_reject; ?>
+								</td>
+								<td class="center">
+									<?php echo $object['created_at']; ?>
+								</td>
+								<td class="center">
+									
+									
+								<!--	<a class="btn btn-danger" title="Delete" href="javascript:void(0);" onclick="del_officer('<?php echo $id; ?>')">
+										<i class="halflings-icon white trash"></i> 
+									</a> -->
+									<a  target="_blank" title="View PDF" href="<?php echo LIVE_SITE; ?>/pdf/docs/service_tkt_pdf.php?id=<?php echo $id; ?>">
+										<img src="<?php echo LIVE_SITE; ?>/img/pdf.png"  />
+									</a>
+									<a  title="View Ticket Detail" href="javascript:void(0);" onclick="view_detail_ticket('<?php echo $id; ?>');">
+										<img src="<?php echo LIVE_SITE; ?>/img/look.jpg" width="40" height="30"  />
+									</a>
+								</td>
+							</tr>
+							     <?php
+}?>                                
+							  </tbody>
 						 </table>  
 						  
 					</div>
@@ -105,9 +175,11 @@ date_default_timezone_set("America/New_York");
 		</div>
 		<div class="modal-footer">
 			<a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+			<?php if($_SESSION['usertype'] < 3 ) { ?>
 			<a href="javascript:void(0);" id="add_notes_link" onclick="add_notes();" class="btn btn-primary">Add Notes</a> 
 			<a href="javascript:void(0);" id="ticket_cancel_link" onclick="cancel_service_ticket();" class="btn btn-primary">Cancel This Ticket</a> 
 			<a href="javascript:void(0);" id="redirect_ticket_link" onclick="redirect_service_ticket();" class="btn btn-primary">Redirect</a> 
+			<?php } ?>
 		</div>
 	</div>
 	<!-- =========================== CANCEL TICKETS WINDOW ========================================== -->
@@ -217,27 +289,20 @@ date_default_timezone_set("America/New_York");
 	<!--- ===================================================================================================== -->
 	<script>
 	  $(document).ready(function() {
-        var tickets_table = $('.datatable_tickets').dataTable( {
-        	ajax: "ajax_call_functions.php?action=get_service_ticket&sr_type=<?php echo $_GET['sr_type'];?>", 
+        $('.datatable_tickets').dataTable( {
            aLengthMenu: [
-		        [20, 50, 100, 200, -1],
-		        [25, 50, 100, 200, "All"]
-		    ],
-			"aaSorting": [[ 0, "desc" ]],
-    		iDisplayLength: -1,
-			"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
+        [20, 50, 100, 200, -1],
+        [25, 50, 100, 200, "All"]
+    ],
+	"aaSorting": [[ 0, "desc" ]],
+    iDisplayLength: -1,
+		"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
 			"sPaginationType": "bootstrap",
 			"oLanguage": {
 			"sLengthMenu": "_MENU_ records per page"
 			}
-        });
-		console.log(tickets_table);
-        setInterval( function () {
-        	
-        	tickets_table.api().ajax.reload( null, false ); // user paging is not reset on reload
-        }, 10000 );
-        
-    });
+        } );
+    } );
 	// ----------- View Detail of Ticket -----------------
 	function view_detail_ticket(id){
 		

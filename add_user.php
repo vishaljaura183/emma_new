@@ -25,7 +25,7 @@ label.error {
 <script type="text/javascript">
 $(document).ready(function(){
 	//Validations----------------
-	validator = $("#to_be_validated2").validate({
+	validator = $("#to_be_validated").validate({
 		rules: {
 			name:{
 				required : true,
@@ -60,9 +60,6 @@ $(document).ready(function(){
 			email:{
 				remote: "This email ID is already taken."
 			}
-		},
-		submitHandler: function(form) {
-			$("#to_be_validated2").submit();
 		}
 	});
 	
@@ -78,12 +75,7 @@ $(document).ready(function(){
         'Password must contain minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character.');
 	
 });
-function validate_form(){
-//alert('ddd');
-if($("#to_be_validated2").valid()){
-$("#to_be_validated2").submit();
-}
-}
+
 
 </script>
 
@@ -129,14 +121,14 @@ $("#to_be_validated2").submit();
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">Name </label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead" id="typeahead"  required name="name" value="" data-provide="typeahead" data-items="4" >
+								<input type="text" class="span6 typeahead" id="typeahead" name="name" value="" data-provide="typeahead" data-items="4" >
 								
 							  </div>
 							</div>
 							<div class="control-group">
 							  <label class="control-label" for="date01">Username</label>
 							  <div class="controls">
-								<input type="text"  class="span6 typeahead" id="" name="username" value="" required>
+								<input type="text"  class="span6 typeahead" id="" name="username" value="">
 								<input type="hidden" class="span6 typeahead" id="userid" name="userid" value="">
 							  </div>
 							</div>
@@ -144,7 +136,7 @@ $("#to_be_validated2").submit();
 							<div class="control-group">
 							  <label class="control-label" for="date01">User Type</label>
 							  <div class="controls">
-								<select name="usertype" required>
+								<select name="usertype">
 								<option value="">Select</option>
 								<option value="1">Admin</option>
 								<option value="2">Dispatcher</option>
@@ -156,14 +148,14 @@ $("#to_be_validated2").submit();
 							<div class="control-group">
 							  <label class="control-label" for="date01">Email</label>
 							  <div class="controls">
-								<input type="email"  class="span6 typeahead" id="" name="email"  required value="">
+								<input type="email"  class="span6 typeahead" id="" name="email" value="">
 							  </div>
 							</div>
 							
 							<div class="control-group">
 							  <label class="control-label" for="date01">Password</label>
 							  <div class="controls">
-								<input type="password"  class="span6 typeahead" id="password2" name="new_pass" value="" required minlength="8">
+								<input type="password"  class="span6 typeahead" id="password2" name="new_pass" value="" minlength="8">
 							  </div>
 							</div>
 							
@@ -178,13 +170,13 @@ $("#to_be_validated2").submit();
 						
 							<div class="form-actions">
 							
-							  <button type="submit" name="submit" class="btn btn-primary">Save</button>
+							  <input type="submit" name="submit" value="save" class="btn btn-primary">
 							  <button type="reset" class="btn">Cancel</button>
 							</div>
 						  </fieldset>
-
+						</form>
 					</div>
-						</form>   
+						   
 				</div><!--/span-->
 
 			</div><!--/row-->

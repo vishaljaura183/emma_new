@@ -19,19 +19,22 @@ if(isset($_POST['userid']) && $_POST['userid']!='')
 
 $first_name=$_POST['first_name']; 
 $last_name=$_POST['last_name']; 
-$username=$_POST['username']; 
-$email=$_POST['email']; 
-$phone=$_POST['phone']; 
-$password=$_POST['password']; 
 
+$phone=$_POST['phone']; 
+ 
+
+$new_pass = $_POST['new_pass'];
+$extra_field = '';
+if($new_pass != ''){
+$extra_field = " password='$new_pass' ";
+}
 
 
 $sql=	"UPDATE technician SET 
 		first_name='$first_name', 
 		last_name='$last_name', 
-		username='$username', 
-		email='$email',
-		phone='$phone'
+		phone='$phone',
+		$extra_field
 		WHERE id=$userid";
 $result=mysqli_query($db,$sql);
 if($result){
@@ -46,8 +49,8 @@ header("location:profile_technician.php?id=$userid&msg=failed");
 }
 
 // ================ CHANGE PASSWORD ================
+/*
 if(isset($_POST['change_pass']) && $_POST['change_pass']!=''){
-
 $curr_pass = $_POST['curr_pass'];
 $new_pass = $_POST['new_pass'];
 $conf_pass = $_POST['conf_pass'];
@@ -70,6 +73,6 @@ if($result){
 // Updated
 header("location:profile_technician.php?msg=pass_success&id=$userid");
 }
-
 }
+*/
 ?>

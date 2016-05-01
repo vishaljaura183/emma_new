@@ -7,18 +7,18 @@ $id=$_POST['del_id'];
 
 
 
-$sql="UPDATE admin SET is_delete=1 WHERE id=$id";
-$result=mysqli_query($db,$sql);
-if($result){
-echo "success";
-// Delted
-//header("location:officers.php?msg=success");
-}
-else{
+	$sql="UPDATE admin SET is_deleted=1 WHERE id=$id";
+	$result=mysqli_query($db,$sql);
+	if($result){
+	echo "success";
+	// Delted
+	//header("location:officers.php?msg=success");
+	}
+	else{
 
-// Failed Delete
-// header("location:add_officers.php?msg=failed");
-}
+	// Failed Delete
+	// header("location:add_officers.php?msg=failed");
+	}
 }
 
 

@@ -61,7 +61,7 @@ include('process/technician_profile.php');
 							<div class="control-group">
 							  <label class="control-label" for="date01">Email</label>
 							  <div class="controls">
-								<input type="email" required class="span6 typeahead" id="email" name="email" value="<?php echo $row['email']; ?>">
+								<input type="email" required class="span6 typeahead" id="email" disabled="disabled" name="email" value="<?php echo $row['email']; ?>">
 								<input type="hidden" class="span6 typeahead" id="userid" name="userid" value="<?php echo $row['id']; ?>">
 							  </div>
 							</div>
@@ -76,15 +76,24 @@ include('process/technician_profile.php');
 							<div class="control-group">
 							  <label class="control-label" for="date01">Username</label>
 							  <div class="controls">
-								<input type="text" required class="span6 typeahead" id="username" name="username"  value="<?php echo $row['username']; ?>">
+								<input type="text" required class="span6 typeahead" id="username" name="username"  disabled="disabled" value="<?php echo $row['username']; ?>">
 							  </div>
 							</div>		
 							
+							<div class="control-group">
+							  <label class="control-label" for="date01">New Password</label>
+							  <div class="controls">
+								<input type="password" class="span6 typeahead" id="date01" name="new_pass" autocomplete="off" value="">
+								( Fill password to change Else leave it blank )
+							  </div>
+							</div>
 							
+							
+
 						
 							<div class="form-actions">
 							
-							  <button type="submit" name="submit" class="btn btn-primary">Update</button>
+							  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 							  <button type="reset" class="btn">Cancel</button>
 							</div>
 						  </fieldset>
@@ -95,49 +104,7 @@ include('process/technician_profile.php');
 
 			</div><!--/row-->
 			
-			<div class="row-fluid sortable">
-				<div class="box span12">
-					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Reset Password</h2>
-						<div class="box-icon">
-							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
-						</div>
-					</div>
-					<div class="box-content">
-						<form class="form-horizontal" method="POST" action="">
-						  <fieldset>
-							
-							<div class="control-group">
-							  <label class="control-label" for="date01">New Password</label>
-							  <div class="controls">
-								<input type="password" class="span6 typeahead" required id="date01" name="new_pass" value="">
-								<input type="hidden" id="date01" name="change_pass" value="change_pass">
-							  </div>
-							</div>
-							
-							<div class="control-group">
-							  <label class="control-label" for="date01">Confirm Password</label>
-							  <div class="controls">
-								<input type="password" class="span6 typeahead" id="date01" required name="conf_pass" value="">
-							  </div>
-							</div>
-
-							         
-						
-							<div class="form-actions">
-							  <button type="submit" class="btn btn-primary">Save changes</button>
-							  <button type="reset" class="btn">Cancel</button>
-							</div>
-						  </fieldset>
-						</form>   
-
-					</div>
-				</div><!--/span-->
-
-			</div><!--/row-->
-		
+			
 	</div><!--/.fluid-container-->
 	
 			<!-- end: Content -->

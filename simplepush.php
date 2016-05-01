@@ -1,19 +1,23 @@
 <?php
-
+//echo phpinfo();die;
 // Put your device token here (without spaces):
-$deviceToken = 'a5f715eb24fe1d464de23c9685a06ad0718b7ff831f1888cbd610d8be659377d';
+//$deviceToken = 'a5f715eb24fe1d464de23c9685a06ad0718b7ff831f1888cbd610d8be659377d';
+$deviceToken = 'fb49220fa7b60873ee249957b05aa629c693cbf17fdf5ebe50516d14daca4974';
 
 // Put your private key's passphrase here:
 //$passphrase = 'pushchat';
 
 // Put your alert message here:
 $message = 'My first push notification!';
-
+$apnsCert = dirname(__FILE__).'/EmmaPUSH_new.pem';
+//die;
 ////////////////////////////////////////////////////////////////////////////////
 
 $ctx = stream_context_create();
-stream_context_set_option($ctx, 'ssl', 'local_cert', 'pushcert.pem');
-//stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
+
+//print_r($ctx);
+stream_context_set_option($ctx, 'ssl', 'local_cert', $apnsCert);
+//stream_context_set_option($ctx, 'ssl', '', $passphrase);
 
 // Open a connection to the APNS server
 $fp = stream_socket_client(

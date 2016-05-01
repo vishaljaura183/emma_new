@@ -3075,3 +3075,12 @@ a.download_btn:hover {
     padding: 10px;
 	margin: 5px;
 }
+.green_clr {
+	background-color: green !important;
+}
+.gray_clr {
+	background-color: darkgray !important;
+}
+.font_bigger {
+font-size: 18px;
+}

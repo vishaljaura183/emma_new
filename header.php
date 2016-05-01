@@ -103,16 +103,36 @@ header("location:login.php?msg=plslogin");
 		color: red;
 	}
 	</style>
+	<?php
+	// ------------------------------- OPEN TICKETS -----------------
+	$sql_open="SELECT count(status) as total_open FROM `service_tickets` WHERE  `status`=0";
+	$result_open=mysqli_query($db,$sql_open);
 	
+	$result_open_execute=mysqli_fetch_all($result_open,MYSQLI_ASSOC);
+	$total_open_tickets = $result_open_execute[0]['total_open'];
+	//print_r($total_open_tickets);die;
+	// --------------- CLOSED TICKETS ----------------
+	$sql_closed="SELECT count(status) as total_open FROM `service_tickets` WHERE  `status`=1";
+	$result_closed=mysqli_query($db,$sql_closed);
+	
+	$result_closed_execute=mysqli_fetch_all($result_closed,MYSQLI_ASSOC);
+	$total_closed_tickets = $result_closed_execute[0]['total_open'];
+	//print_r($total_open_tickets);die;
+	
+	// --------------- CANCELLED TICKETS ----------------
+	$sql_cancelled="SELECT count(status) as total_open FROM `service_tickets` WHERE  `status`=2";
+	$result_cancelled=mysqli_query($db,$sql_cancelled);
+	
+	$result_cancelled_execute=mysqli_fetch_all($result_cancelled,MYSQLI_ASSOC);
+	$total_cancelled_tickets = $result_cancelled_execute[0]['total_open'];
+	//print_r($total_open_tickets);die;
+	?>
 	<div class = "fixedLoader" >
 		<span>
 			<img src = "img/loader.GIF"></img>
 		</span>
 		&nbsp;Processing...
 	</div>
-	
-	
-	
 	
 		<!-- start: Header -->
 	<div class="navbar">
@@ -172,13 +192,15 @@ header("location:login.php?msg=plslogin");
 					<?php if($_SESSION['usertype']<2) {
 					?>
 						<li><a href="poll_venues.php"><i class="icon-align-justify"></i><span class="hidden-tablet">Election Setup</span></a></li>
-					<?php } ?>
+					
 						
 				
 					<!--	<li><a href="users.php"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li> -->	
 					
-						<li><a href="poll_venues_listing.php"><i class="icon-reorder"></i><span class="hidden-tablet">Poll Venues Listing</span></a></li>
-						
+						<li><a href="poll_venues_listing.php"><i class="icon-reorder"></i><span class="hidden-tablet">Poll Venues </span></a></li>
+						<li><a href="reason_listing.php"><i class="icon-reorder"></i><span class="hidden-tablet">Call Reasons </span></a></li>
+						<li><a href="supplies_listing.php"><i class="icon-reorder"></i><span class="hidden-tablet">Common Supplies </span></a></li>
+						<?php } ?>
 						<!--<li><a href="assign_polling_venues.php"><i class="icon-tasks"></i><span class="hidden-tablet">Service Ticket</span></a></li> -->
 						<li>
 							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Service Ticket</span>
@@ -190,9 +212,15 @@ header("location:login.php?msg=plslogin");
 								<li><a class="submenu" href="assign_polling_venues.php"><i class="icon-plus"></i><span class="hidden-tablet"> Assign New Ticket</span></a></li>
 								<?php } ?>
 								<li><a class="submenu" href="view_service_tickets.php"><i class="icon-reorder"></i><span class="hidden-tablet"> View All Tickets</span></a></li>
-								<li><a class="submenu" href="view_service_tickets.php?sr_type=0"><i class="icon-file-alt"></i><span class="hidden-tablet"> Open Tickets</span></a></li>
-								<li><a class="submenu" href="view_service_tickets.php?sr_type=1"><i class="icon-file-alt"></i><span class="hidden-tablet"> Closed Tickets</span></a></li>
-								<li><a class="submenu" href="view_service_tickets.php?sr_type=2"><i class="icon-file-alt"></i><span class="hidden-tablet"> Cancelled Tickets</span></a></li>
+								
+								<li><a class="submenu" href="view_service_tickets.php?sr_type=0"><i class="icon-file-alt"></i><span class="hidden-tablet"> Open Tickets</span>
+								<span class="label label-important green_clr font_bigger" >  <?php echo $total_open_tickets;?> </span></a></li>
+								
+								<li><a class="submenu" href="view_service_tickets.php?sr_type=1"><i class="icon-file-alt"></i><span class="hidden-tablet"> Closed Tickets</span>
+								<span class="label label-important font_bigger">  <?php echo $total_closed_tickets;?> </span></a></li>
+								
+								<li><a class="submenu" href="view_service_tickets.php?sr_type=2"><i class="icon-file-alt"></i><span class="hidden-tablet"> Cancelled Tickets</span>
+								<span class="label label-important gray_clr font_bigger" >  <?php echo $total_cancelled_tickets;?> </span></a></li>
 							</ul>
 						</li>
 						

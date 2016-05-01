@@ -440,18 +440,11 @@ $sql = "SELECT ST.*, AD.name as dispatcher, PV.ward, PV.address_line_1, PV.addre
 
 function sendPushNotificationToTechnician($technician_id, $message, $ticket_id) { 
     global $db;
-    $sql = "Select push_regid,device_type from technician where id = '$technician_id' ";
+    $sql = "Select push_regid from technician where id = '$technician_id' ";
     $result = mysqli_query($db, $sql);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     $count = mysqli_num_rows($result);
-	$device_type = $row['device_type'];
-	$push_regid = $row['push_regid'];
     if ($count > 0) {
-	if($device_type == 'ios'){
-	sendIosNotification($push_regid, $message);
-	}
-	else{
-	
         $msg = array
             (
             'message' => $message,
@@ -485,65 +478,6 @@ function sendPushNotificationToTechnician($technician_id, $message, $ticket_id) 
         $result = curl_exec($ch);
         curl_close($ch);
         //print_r($result);
-		}
     }
-	
-}
-function sendIosNotification($device_token,$message){
-
-//$deviceToken = 'fb49220fa7b60873ee249957b05aa629c693cbf17fdf5ebe50516d14daca4974';
-$deviceToken = $device_token;
-
-// Put your private key's passphrase here:
-//$passphrase = 'pushchat';
-
-// Put your alert message here:
-$message = $message;
-$apnsCert = dirname(__FILE__).'/EmmaPUSH_new.pem';
-//die;
-////////////////////////////////////////////////////////////////////////////////
-
-$ctx = stream_context_create();
-
-//print_r($ctx);
-stream_context_set_option($ctx, 'ssl', 'local_cert', $apnsCert);
-//stream_context_set_option($ctx, 'ssl', '', $passphrase);
-
-// Open a connection to the APNS server
-$fp = stream_socket_client(
-	'ssl://gateway.push.apple.com:2195', $err,
-	$errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
-
-// var_dump($fp) ; die ;
-
-if (!$fp)
-	exit("Failed to connect: $err $errstr" . PHP_EOL);
-
-echo 'Connected to APNS' . PHP_EOL;
-
-// Create the payload body
-$body['aps'] = array(
-	'alert' => $message,
-	'sound' => 'default'
-	);
-
-// Encode the payload as JSON
-$payload = json_encode($body);
-
-// Build the binary notification
-$msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
-
-// Send it to the server
-$result = fwrite($fp, $msg, strlen($msg));
-/*
-if (!$result)
-	echo 'Message not delivered' . PHP_EOL;
-else
-	echo 'Message successfully delivered' . PHP_EOL;
-*/
-// Close the connection to the server
-fclose($fp);
-
-
 }
 ?>
