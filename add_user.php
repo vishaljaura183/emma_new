@@ -143,6 +143,7 @@ $(document).ready(function(){
 								<option value="3">View Only</option>
 								</select>
 							  </div>
+							  
 							</div>
 							
 							<div class="control-group">
